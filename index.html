@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinh Chú Đại Bi & Bát Nhã Tâm Kinh (Voice 5.0)</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #8b0000; /* Đỏ trầm uy nghiêm */
+            --secondary-color: #d4af37; /* Vàng kim */
+            --bg-color: #fcf8f2; /* Nền giấy vàng nhạt ấm áp */
+            --text-color: #2c2c2c;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .dark-mode {
+            --primary-color: #e53935;
+            --secondary-color: #fbc02d;
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --card-bg: #1e1e1e;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #5c0000);
+            color: #fff;
+            padding: 20px 15px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            color: var(--secondary-color);
+        }
+
+        header p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            right: 15px;
+            top: 20px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            background: var(--card-bg);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 76px;
+            z-index: 999;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px;
+            background: none;
+            border: none;
+            font-weight: 600;
+            color: var(--text-color);
+            cursor: pointer;
+            text-align: center;
+            border-bottom: 3px solid transparent;
+            font-size: 0.9rem;
+        }
+
+        .tab-btn.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--secondary-color);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        .content-section {
+            display: none;
+            background: var(--card-bg);
+            padding: 25px 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2.sutra-title {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .sutra-subtitle {
+            text-align: cỡ chữ: 0.85rem;
+            text-align: center;
+            font-style: italic;
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .dark-mode .sutra-subtitle {
+            color: #aaa;
+        }
+
+        /* Toolbar (Font & Voice Controls) */
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(212, 175, 55, 0.1);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .font-controls button {
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        /* TTS Voice Action Buttons */
+        .voice-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .voice-btn {
+            background: var(--secondary-color);
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .voice-btn.stop {
+            background: #e53935;
+        }
+
+        .voice-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Audio Player Box (Mẫu MP3 gốc) */
+        .audio-player-box {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .audio-player-box audio {
+            width: 100%;
+            height: 35px;
+            border-radius: 20px;
+        }
+
+        /* Sutra Text Style */
+        .sutra-body {
+            font-size: 1.05rem;
+            text-align: justify;
+            line-height: 1.8;
+            white-space: pre-line;
+        }
+
+        .sutra-body p {
+            margin-bottom: 15px;
+        }
+
+        .mantra-highlight {
+            color: var(--primary-color);
+            font-weight: bold;
+            background: rgba(229, 57, 53, 0.05);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Nam Mô Đại Bi Quán Thế Âm Bồ Tát</h1>
+        <p>Phiên bản tích hợp giọng đọc văn bản tự động</p>
+        <button class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()">
+            <i class="fa-solid fa-moon"></i>
+        </button>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab(event, 'daibi')">
+            <i class="fa-solid fa-hands-praying"></i> Chú Đại Bi
+        </button>
+        <button class="tab-btn" onclick="switchTab(event, 'batnha')">
+            <i class="fa-solid fa-om"></i> Bát Nhã Tâm Kinh
+        </button>
+    </div>
+
+    <div class="container">
+        
+        <!-- SECTION 1: CHÚ ĐẠI BI -->
+        <div id="daibi" class="content-section active">
+            <h2 class="sutra-title">THIÊN THỦ THIÊN NHÃN VÔ NGẠI ĐẠI BI TÂM ĐÀ RA NI</h2>
+            <div class="sutra-subtitle">Kinh Phạn ngữ dịch nghĩa & Trì tụng</div>
+
+            <!-- Công cụ chỉnh chữ & Giọng đọc Google -->
+            <div class="toolbar">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="speakText('daibi')">
+                        <i class="fa-solid fa-volume-high"></i> Đọc kinh
+                    </button>
+                    <button class="voice-btn stop" onclick="stopSpeech()">
+                        <i class="fa-solid fa-stop"></i> Dừng
+                    </button>
+                </div>
+                <div style="display: flex; align-items: center; gap: 5px;">
+                    <span>Cỡ chữ:</span>
+                    <div class="font-controls">
+                        <button onclick="adjustFontSize(-1)">-</button>
+                        <button onclick="adjustFontSize(1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Audio mẫu MP3 -->
+            <div class="audio-player-box">
+                <audio controls>
+                    <source src="https://archive.org/download/ChuDaiBi_201803/ChuDaiBi.mp3" type="audio/mp3">
+                    Trình duyệt của bạn không hỗ trợ phát âm thanh.
+                </audio>
+            </div>
+
+            <!-- Nội dung Chú Đại Bi -->
+            <div class="sutra-body" id="text-daibi">
+<p>Nam-mô Đại-bi Quán-Thế-Âm, xin cúi đầu lễ bái đấng vô ngại đại bi, nguyện xin con được ánh sáng từ bi soi rọi tâm hồn.</p>
+
+<p>Thiên thủ thiên nhãn vô ngại đại bi tâm đà-la-ni.</p>
+
+<p class="mantra-highlight">
+1. Na mô hắc ra đát na, đá ra dạ gia.
+2. Na mô a rị gia, bà lô yết đế, thước bát ra gia, bồ đề đát đát đa gia, ma ha đát đát đa gia, ma ha ca lô ni gia.
+3. Tát bàn ra phạt duệ, số đát đát đát đỏa.
+4. Nam mô tất cát lật đỏa, y mông a rị gia, bà lô yết đế, thất lật lăng đà phật ra.
+5. Nam mô na ra cẩn trì, hê rị ma ha bát đa sa mế, tát bà a tha đậu du bằng, a thệ dựng, tát bà tát đa, na ma bà già, ma phạt đạt đậu, đát điệt tha.
+6. A bà lô hê, lô ca đế, ca ra đế, di hê rị, ma ha bồ đề đát đỏa, tát bà tát bà, ma ra ma ra, ma hê ma hê, rị đà dựng, cu lô cu lô yết mông, độ lô độ lô phạt xà gia đế, ma ha phạt xà gia đế, đà ra đà ra, địa rị ni, thất ra gia gia, dá ra dá ra, mạ mạ phạt ma ra, mục đế lệ, y hê y hê, thất na thất na, ra sâm phật ra xá lợi, phạt sa phạt sâm, phật ra xá gia, hô lô hô lô ma ra, hô lô hô lô hê rị, ta ra ta ra, tất rị tất rị, tô rô tô rô, bồ đề dạ, bồ đề dạ, bồ đà dạ, bồ đà dạ, di đế rị dạ, na ra cẩn trì, địa lợi sắc ni na, ba dạ ma ha, ta bà ha.
+7. Tất đát dạ, ta bà ha.
+8. Ma ha tất đát dạ, ta bà ha.
+9. Tất đát dạ du nghệ, thất bàn ra gia, ta bà ha.
+10. Na ra cẩn trì, ta bà ha.
+11. Ma ra na ra, ta bà ha.
+12. Tất ra tăng a mục khê gia, ta bà ha.
+13. Ta bà ma ha, tất đát dạ, ta bà ha.
+14. Giả ra cát tất đát dạ, ta bà ha.
+15. Ba đà ma yết tất đát dạ, ta bà ha.
+16. Na ra cẩn trì mục đà gia, ta bà ha.
+17. Nam mô hắc ra đát na, đá ra dạ gia.
+18. Nam mô a rị gia, bà lô yết đế, thước bát ra gia, ta bà ha.
+</p>
+
+<p>Án tất điện đô, mạn đa la, bạt đà gia, ta bà ha. (3 lần)</p>
+            </div>
+        </div>
+
+        <!-- SECTION 2: BÁT NHÃ TÂM KINH -->
+        <div id="batnha" class="content-section">
+            <h2 class="sutra-title">MA HÀ BÁT NHÃ BA LA MẬT ĐA TÂM KINH</h2>
+            <div class="sutra-subtitle">Quán Tự Tại Bồ Tát hành thâm bát nhã ba la mật đa thời...</div>
+
+            <!-- Công cụ chỉnh chữ & Giọng đọc Google -->
+            <div class="toolbar">
+                <div class="voice-controls">
+                    <button class="voice-btn" onclick="speakText('batnha')">
+                        <i class="fa-solid fa-volume-high"></i> Đọc kinh
+                    </button>
+                    <button class="voice-btn stop" onclick="stopSpeech()">
+                        <i class="fa-solid fa-stop"></i> Dừng
+                    </button>
+                </div>
+                <div style="display: flex; align-items: center; gap: 5px;">
+                    <span>Cỡ chữ:</span>
+                    <div class="font-controls">
+                        <button onclick="adjustFontSize(-1)">-</button>
+                        <button onclick="adjustFontSize(1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Audio mẫu MP3 -->
+            <div class="audio-player-box">
+                <audio controls>
+                    <source src="https://archive.org/download/BatNhaTamKinhTung/BatNhaTamKinh.mp3" type="audio/mp3">
+                    Trình duyệt của bạn không hỗ trợ phát âm thanh.
+                </audio>
+            </div>
+
+            <!-- Nội dung Bát Nhã Tâm Kinh -->
+            <div class="sutra-body" id="text-batnha">
+<p>Quán-Tự-Tại Bồ-tát, hành thâm Bát-nhã Ba-la-mật-đa thời, chiếu kiến ngũ uẩn giai không, độ nhất thiết khổ ách.</p>
+
+<p>Xá-Lợi-Tử! Sắc bất dị không, không bất dị sắc; sắc tức thị không, không tức thị sắc; thọ, tưởng, hành, thức, diệc phục như thị.</p>
+
+<p>Xá-Lợi-Tử! Thị chư pháp không tướng, bất sinh, bất diệt, bất cấu, bất tịnh, bất tăng, bất giảm.</p>
+
+<p>Thị cố không trung vô sắc, vô thọ, tưởng, hành, thức; vô nhãn, nhĩ, tỷ, thiệt, thân, ý; vô sắc, thanh, hương, vị, xúc, pháp; vô nhãn giới, nãi chí vô ý thức giới; vô vô minh, diệc vô vô minh tận, nãi chí vô lão tử, diệc vô lão tử tận; vô khổ, tập, diệt, đạo; vô trí diệc vô đắc.</p>
+
+<p>Dĩ vô sở đắc cố, Bồ-đề-tát-đỏa y Bát-nhã Ba-la-mật-đa cố, tâm vô quái ngại; vô quái ngại cố, vô hữu khủng bố, viễn ly điên đảo mộng tưởng, cứu kính Niết-bàn.</p>
+
+<p>Chư Phật tam thế y Bát-nhã Ba-la-mật-đa cố, đắc A-nậu-đa-la Tam-miệu Tam-bồ-đề.</p>
+
+<p>Cố tri Bát-nhã Ba-la-mật-đa, thị đại thần chú, thị đại minh chú, thị vô thượng chú, thị vô đẳng đẳng chú, năng trừ nhất thiết khổ, chân thật bất hư.</p>
+
+<p class="mantra-highlight">Cố thuyết Bát-nhã Ba-la-mật-đa chú, tức thuyết chú viết:<br>
+Yết đế, yết đế, ba la yết đế, ba la tăng yết đế, bồ đề tát bà ha.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 - Tụng Niệm Hằng Ngày | © Bản Quyền Của KhangPanh68 ®</p>
+    </footer>
+
+    <!-- JavaScript Xử lý giao diện & Giọng đọc Web Speech API -->
+    <script>
+        // 1. Chuyển đổi tab kinh
+        function switchTab(evt, tabName) {
+            stopSpeech(); // Dừng đọc khi đổi tab
+            let sections = document.getElementsByClassName("content-section");
+            for (let i = 0; i < sections.length; i++) {
+                sections[i].classList.remove("active");
+            }
+
+            let buttons = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove("active");
+            }
+
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 2. Chế độ sáng/tối (Dark/Light Mode)
+        function toggleTheme() {
+            document.body.classList.toggle("dark-mode");
+            let icon = document.querySelector("#themeToggleBtn i");
+            if (document.body.classList.contains("dark-mode")) {
+                icon.className = "fa-solid fa-sun";
+            } else {
+                icon.className = "fa-solid fa-moon";
+            }
+        }
+
+        // 3. Phóng to / Thu nhỏ kích thước chữ kinh chung
+        let currentFontSize = 1.05; // rem
+        function adjustFontSize(direction) {
+            currentFontSize += direction * 0.1;
+            if (currentFontSize < 0.85) currentFontSize = 0.85;
+            if (currentFontSize > 1.5) currentFontSize = 1.5;
+            
+            document.getElementById("text-daibi").style.fontSize = currentFontSize + "rem";
+            document.getElementById("text-batnha").style.fontSize = currentFontSize + "rem";
+        }
+
+        // 4. Tính năng Text-to-Speech (Giọng đọc chị Google tích hợp)
+        function speakText(sectionId) {
+            if (!('speechSynthesis' in window)) {
+                alert("Trình duyệt của bạn không hỗ trợ tính năng đọc văn bản.");
+                return;
+            }
+
+            // Dừng ngay nếu đang có tiếng đọc cũ
+            window.speechSynthesis.cancel();
+
+            let textContainer = document.getElementById("text-" + sectionId);
+            let textToRead = textContainer.innerText || textContainer.textContent;
+
+            let utterance = new SpeechSynthesisUtterance(textToRead);
+            utterance.lang = 'vi-VN'; // Đặt ngôn ngữ Tiếng Việt
+            utterance.rate = 0.9;     // Tốc độ đọc chậm rãi, trang nghiêm (có thể chỉnh từ 0.5 đến 1.0)
+            utterance.pitch = 1.0;    // Độ cao giọng nói
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function stopSpeech() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+        }
+    </script>
+</body>
+</html>
