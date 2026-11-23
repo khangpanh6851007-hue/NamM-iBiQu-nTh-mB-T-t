@@ -1,52 +1,64 @@
-# 🪷 Web Tụng Niệm Phật Giáo - Chú Đại Bi & Bát Nhã Tâm Kinh
+# Tụng Niệm ULTRA 3.0 — GitHub 2026
 
-<div align="center">
+Website tĩnh tiếng Việt, phát triển từ bản gốc Kinh Chú Đại Bi & Bát Nhã Tâm Kinh và các bản ULTRA trước.
 
-![GitHub version](https://img.shields.io/badge/version-5.0-red.svg)
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
+## 1. Tệp cần có trong repository
 
-*Ứng dụng web tĩnh hỗ trợ tụng niệm hàng ngày với giao diện tối ưu cho thiết bị di động.*
+Đặt các tệp sau ở thư mục gốc repository:
 
-</div>
+- `index_ultra_3_0_2026.html` — ứng dụng ULTRA 3.0.
+- `manifest.webmanifest` — cấu hình cài đặt PWA.
+- `sw.js` — service worker lưu bộ khung ứng dụng để hỗ trợ mở lại ngoại tuyến.
+- `README.md` — tài liệu hướng dẫn.
+- `.github/workflows/deploy.yml` — GitHub Actions triển khai GitHub Pages.
 
----
+Workflow sẽ tạo bản `index.html` trong thư mục triển khai từ `index_ultra_3_0_2026.html`, vì vậy không cần tự đổi tên tệp nguồn.
 
-## ✨ Giới thiệu Dự án
+## 2. Tính năng
 
-Dự án này được thiết kế và tối ưu riêng cho việc thực hành tụng niệm **Thiên Thủ Thiên Nhãn Vô Ngại Đại Bi Tâm Đà Ra Ni (Chú Đại Bi)** và **Ma Hà Bát Nhã Ba Mật Đa Tâm Kinh**. 
+- Giữ lại hai bài gốc: Chú Đại Bi và Bát Nhã Tâm Kinh.
+- Thư viện mục lục tham khảo 186 mục: Trường Bộ DN 1–34 và Trung Bộ MN 1–152, liên kết đến SuttaCentral.
+- Bộ đếm niệm Phật, tổng số lần tích lũy.
+- Chuông và mõ điện tử, điều chỉnh nhịp.
+- Lịch tháng, dấu ngày thực hành và tóm tắt tuần.
+- Thống kê ngày thực hành, số lần niệm, bài đã đánh dấu và chuỗi ngày liên tiếp.
+- Thư viện nội dung cá nhân, lịch và dữ liệu ULTRA 2.0.
+- Xuất/nhập JSON để sao lưu và chuyển dữ liệu.
+- Giao diện hoa sen, hiệu ứng ánh sáng, responsive.
+- PWA/service worker cache bộ khung ứng dụng để mở lại ngoại tuyến.
 
-Giao diện mang phong cách tối giản, trang nghiêm, giúp người dùng dễ dàng sử dụng trên điện thoại thông minh thông qua các trình soạn thảo mã nguồn di động như **Acode** hoặc **Trebedit**.
+**Lưu ý về thư viện:** 186 mục là mục lục theo số hiệu kèm liên kết nguồn, không phải 186 bản dịch toàn văn được nhúng sẵn. Hãy kiểm tra ngôn ngữ, bản dịch, nguồn và quyền sử dụng tại trang gốc trước khi sao chép/phân phối.
 
----
+## 3. Triển khai lên GitHub Pages
 
-## 🌟 Tính năng Nổi bật
+1. Tạo hoặc mở repository GitHub.
+2. Đưa các tệp nguồn vào thư mục gốc theo mục 1.
+3. Tạo thư mục `.github/workflows/` và đặt workflow tải kèm thành `.github/workflows/deploy.yml`.
+4. Commit và push lên nhánh `main`.
+5. Mở **Settings → Pages**. Chọn **GitHub Actions** làm nguồn triển khai.
+6. Mở tab **Actions** để xem workflow `Deploy Tụng Niệm ULTRA 3.0` chạy. Khi hoàn tất, mở URL GitHub Pages được hiển thị trong job deploy.
 
-* **Giao diện 5.0 Hiện đại:** Bố cục hài hòa, sử dụng màu đỏ trầm uy nghiêm và vàng kim thanh tịnh.
-* **Chế độ Sáng / Tối (Dark/Light Mode):** Hỗ trợ chuyển đổi linh hoạt giúp bảo vệ mắt khi tụng kinh vào ban đêm.
-* **Tích hợp Giọng đọc AI (Text-to-Speech):** Sử dụng Web Speech API chuẩn tiếng Việt (`vi-VN`) với tốc độ được tinh chỉnh chậm rãi, trang nghiêm giúp bạn dò theo hoặc nghe đọc tự động.
-* **Trình phát Audio mẫu:** Tích hợp sẵn nguồn âm thanh trực tuyến để hỗ trợ thực hành.
-* **Tùy chỉnh cỡ chữ trực tiếp:** Nút tăng/giảm kích thước chữ nhanh chóng ngay trên màn hình.
-* **Responsive hoàn hảo:** Hiển thị mượt mà trên mọi kích thước màn hình từ điện thoại đến máy tính bảng.
+Workflow tự tạo `site/index.html` từ `index_ultra_3_0_2026.html` và đưa kèm `manifest.webmanifest`, `sw.js`.
 
----
+## 4. Cài đặt và sử dụng ngoại tuyến
 
-## 📱 Hướng dẫn Sử dụng trên Acode / Trebedit
+- Mở website GitHub Pages bằng HTTPS và truy cập online lần đầu.
+- Service worker sẽ cache tệp HTML chính, manifest và các tài nguyên cùng origin được yêu cầu sau đó.
+- Có thể dùng menu trình duyệt **Thêm vào màn hình chính / Install app** nếu trình duyệt hỗ trợ.
+- Dữ liệu bài riêng, lịch, dấu trang và bộ đếm lưu trên trình duyệt/thiết bị hiện tại.
+- Các trang ngoài SuttaCentral/CBETA, MP3 ngoài và nội dung chưa được cache vẫn cần Internet.
+- Service worker không hoạt động khi mở trực tiếp bằng `file://`; cần HTTPS hoặc localhost.
 
-1. Mở ứng dụng **Acode** hoặc **Trebedit** trên thiết bị Android của bạn.
-2. Tạo một tệp mới và đặt tên là `index.html`.
-3. Sao chép toàn bộ mã nguồn của dự án dán vào tệp `index.html`.
-4. Nhấn nút **Preview** (Xem trước) để chạy ứng dụng trực tiếp trên trình duyệt tích hợp.
+## 5. Đồng bộ tài khoản
 
----
+Đồng bộ thật giữa nhiều thiết bị chưa được bật trong bản website tĩnh. Muốn có đăng nhập và đồng bộ đám mây cần cấu hình backend (ví dụ Firebase Authentication và Firestore), quy tắc bảo mật theo tài khoản, phân quyền và chính sách sao lưu. Không đặt mật khẩu, private key hoặc thông tin bí mật trong HTML công khai.
 
-## 🚀 Cấu trúc Tệp
+Trong lúc chưa có backend, hãy dùng chức năng **Xuất dữ liệu ULTRA 3.0** và **Nhập dữ liệu** để chuyển dữ liệu thủ công.
 
-Kho lưu trữ được thiết kế gọn nhẹ dưới dạng **Single-Page Application (SPA)** hoàn toàn bằng mã nguồn thuần:
+## 6. Nguồn tham khảo
 
-```text
-📦 chu-dai-bi-web
- ┣ 📜 index.html      # Tệp chứa toàn bộ cấu trúc HTML, CSS và JavaScript
- ┗ 📜 README.md       # Tài liệu hướng dẫn dự án
+- SuttaCentral: https://suttacentral.net/
+- Phương pháp biên tập SuttaCentral: https://suttacentral.net/methodology
+- CBETA: https://cbeta.org/en
+
+Các liên kết nguồn là nơi tra cứu; ứng dụng không xác nhận mọi bản dịch ở nguồn đều có cùng ngôn ngữ hoặc quyền tái sử dụng.
